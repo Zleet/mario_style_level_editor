@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+	
+		<meta charset="UTF-8">
+
+		<style>
+		
+			body {
+				background-color	: black;
+				color				: yellow;
+				font				: 10pt arial;
+			}
+		
+			select {
+				background-color	: black;
+				color				: yellow;
+				font				: 10pt arial;
+				border				: 2px solid red;
+				border-radius		: 10px;
+			}
+			
+			#map_canvas {
+				border				: 2px solid red;
+				width				: 768px;
+				height				: 720px;
+				image-rendering		: -moz-crisp-edges;
+				image-rendering		: -webkit-crisp-edges;
+				image-rendering		: pixelated;
+				image-rendering		: crisp-edges;
+			}
+			
+			#hidden_tile_canvas {
+				border				: 2px solid red;
+			}
+			
+			#map_position_canvas {
+				border				: 2px solid red;
+				height				: 15px;
+				width				: 384px;
+				image-rendering		: -moz-crisp-edges;
+				image-rendering		: -webkit-crisp-edges;
+				image-rendering		: pixelated;
+				image-rendering		: crisp-edges;
+			}
+			
+			button {
+				background-color	: black;
+				color				: yellow;
+				font				: 10pt arial;
+				border				: 2px solid red;
+				border-radius		: 10px;
+			}
+			
+			#current_tile_row_input {
+				background-color	: black;
+				color				: yellow;
+				font				: 10pt arial;
+				border				: 2px solid red;
+				border-radius		: 10px;
+				width				: 40px;
+				text-align			: center;
+			}
+			
+			#current_tile_col_input {
+				background-color	: black;
+				color				: yellow;
+				font				: 10pt arial;
+				border				: 2px solid red;
+				border-radius		: 10px;
+				width				: 40px;
+				text-align			: center;
+			}
+
+		</style>
+
+		<script src="js.js"></script>
+		<script src="tiles.js"></script>
+		<script src="control_window.js"></script>
+		<script src="enemies_window.js"></script>
+		<script src="mick_lib.js"></script>
+	
+	</head>
+	
+	<body onload="initialise_page()">
+	
+		<table align="center">
+			<tr>
+				<td>
+					MAP ZOOM
+				</td>
+				<td style="width: 5px;">
+				</td>
+				<td>
+					<!-- zoom dropdown menu for user to select a zoom level -->
+					<!-- for the map window -->
+					<select id="map_zoom_dropdown_menu" onchange="map_zoom_dropdown_has_changed()">
+						<option value="1">x 1</option>
+						<option value="2">x 2</option>
+						<option value="3">x 3</option>
+						<option value="4">x 4</option>
+						<option value="5">x 5</option>
+					</select>
+				</td>
+				<td style="width: 5px;">
+				</td>
+				<td>
+					<button onclick="move_to_start_of_map()">START</button>
+				</td>
+				<td>
+					<button style="width: 40px;" onclick="move_map_horizontally(-4)"><<</button>
+				</td>
+				<td>
+					<button style="width: 40px;" onclick="move_map_horizontally(-1)"><</button>
+				</td>
+				<td>
+					<button style="width: 40px;" onclick="move_map_horizontally(1)">></button>
+				</td>
+				<td>
+					<button style="width: 40px;" onclick="move_map_horizontally(4)">>></button>
+				</td>
+				<td>
+					<button onclick="move_to_end_of_map()">END</button>
+				</td>
+				<td style="width: 5px;">
+				</td>
+				<td>
+					ROW
+				</td>
+				<td>
+					<input type="text" id="current_tile_row_input">
+				</td>
+				<td>
+					COL
+				</td>
+				<td>
+					<input type="text" id="current_tile_col_input">
+				</td>
+				</tr>
+			</tr>
+		</table>
+		
+		<!-- current map position canvas -->
+		<table align="center">
+			<tr>
+				<td>
+					<!-- 25 screens wide x 16 tiles = 240 px width for -->
+					<!-- map position canvas -->
+					<!-- let's make this 240 with double size pixels -->
+					<canvas id="map_position_canvas" width="384" height="15"></canvas>
+				</td>
+			</tr>
+		</table>
+		
+		<!-- map canvas -->
+		<table align="center">
+			<tr>
+				<td>
+					<canvas id="map_canvas" width="256" height="240" onmousemove="mouse_is_over_map_canvas(event)" onclick="map_canvas_has_been_clicked()"></canvas>
+				</td>
+			</tr>
+		</table>
+		
+		<!-- hidden tile canvas -->
+		<canvas id="hidden_tile_canvas" width="3200" height="16"></canvas>
+	
+	</body>
+
+</html>

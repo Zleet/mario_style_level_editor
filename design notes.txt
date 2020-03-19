@@ -1,0 +1,28 @@
++++++++++++++++++++++++++++++++++++++++
+MARIO STYLE LEVEL EDITOR - DESIGN NOTES
++++++++++++++++++++++++++++++++++++++++
+
+NES screen resolution was 256px x 240px
+Assuming 16px x 16px tiles, this gives a screen of 16 tiles wide by 15 tiles high.
+
+A typical mario 1 level can vary in total width from world 1-1 (3584 pixels wide = 14 screens wide) to world 8-1 (6400 pixels wide = 25 screens wide)
+
+Let's set the level editor up so that it can cope with the max level size.
+
++++++++++++++++
+CONTROLS WINDOW
++++++++++++++++
+
+Window with the following controls:
+- FILL MAP WITH CURRENT TILE
+Fills the entire map with the current tile
+- CURRENT TILE > 2 x FLOOR
+- fill the bottom two rows of the entire map with the current tile
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+A MUCH MORE EFFICIENT METHOD FOR DRAWING THE MAP CANVAS
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Rather than draw each tile pixel by pixel (16 x 16 = 256 pixels per tile; 15 x 14 tiles in the map canvas = 210 tiles; a grand total of 53,760 pixel drawin operations)...
+...build a hidden canvas that contains all the tiles, drawn out in a big row, then simply index into this canvas to draw a tile to the map canvas.
+Also: instead of drawing 14 x 15 = 210 tiles every time the user moves the cursor over the map canvas, just draw the 3 x 3 tiles around the tile over which the user is currently hovering.
+This should cut the total number of drawing operations down from 53,760 to 9(!)

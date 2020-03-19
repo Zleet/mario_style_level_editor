@@ -1,0 +1,116 @@
++++++
+TO DO
++++++
+
+Build an enemies window which will provide the ability to place enemies on the map, along with a vertical or horizontal movement range for the enemy, initial orientation (left or right) and speed (in pixels per second). Also: type of movement (back and forth or single direction without turning around)
+
+- editing mode dropdown menu in CONTROLS window. User can select one of:
+Place Tiles
+Place Enemies
+
+Can a level generating engine be created? Where you select a level type and a difficulty and the engine builds the level and spits it out?
+e.g. level types:
+cloud/sky level
+underground level
+regular aboveground level
+sea level
+desert level
+etc.
+level difficulties - 1 to 10
+(difficulty affects number of enemies, platform spacing, total number of spaces over which the user has to jump, whether enemies are walking in positions where the player must land after jumping from one platform to another etc.)
+
+Build a settings window. One of the settings in the settings window will be the option:
+map canvas width (in tiles) [  ] (SET)
+
+Tick boxes the user can tick/untick to display:
+1. tiles
+2. enemies
+3. enemy movement ranges
+4. environmental things that kill the player (e.g. fireballs that shoot up from below, leaping fish, spikes etc.)
+
+If the user clicks on a black square in the tile selection canvas, set the current tile to "empty tile" (i.e. -1)
+
+Display current map tile position in terms of row and column (beginning at zero)
+
+Draw some doors
+
+Draw spikes
+
+Try compressing JSON level data? A typical exported level is 18k. What can we get this down to?
+Is this worth the effort? When we consider that an entire game, with approx 8 x 3 = 24 levels (comprising perhaps 40 different maps?) will amount to 40 x 18k = 720k in map data? Less, actually, if the tile data is consolidated across maps.
+Not really, considering the typical game released today is two or three orders of magnitude larger than that...
+
+Fix off by one error when redrawing the map canvas column at the end of the level
+
++++++++++++++++++++++++++++++
+FINISHED WORK
++++++++++++++++++++++++++++++
+Fix the map canvas cursor (currently not displaying)
+DONE (21/2/20 at 1302)
+
+ Rewrite redraw_tile_selection_canvas() so that it reads tiles from the hidden tile canvas.
+ DONE (21/2/20 at 1334)
+ 
+ Rewrite the function for the map cursor hovering over the map canvas so that it displays the cursor.
+(DONE 21/2/20 at 1200)
+
+Fix bug where the map canvas isn't drawing correctly when the user mouses over it. (This only happens when the map has been scrolled off the start of the map. It looks like the tile coordinates to look up aren't being adjusted to deal with the fact that the map has been scrolled a little from the start of the map.)
+(DONE - 21/2/20 at 1544)
+
+Display the map coordinates for the current mouse position at the top of the map as the use moves over different tile positions.
+This will be the row/col values for the current tile over which the user is hovering.
+(DONE 21/2/20 at 1604)
+
+Start and End buttons for instantly moving to start/end of map
+(DONE 21/2/20 at 1620)
+
+Fill in the function build_and_open_control_window(). It will include a button to open the Import/Export Window for Importing/Exporting Data
+Other buttons/controls in the control window will be:
+1. filling entire level with current tile
+2. filling entire rows with current tile
+DONE (21/2/20 at 1800)
+
+Write fill_map_with_current_tile()
+DONE (21/2/20 at 2000)
+
+Write fill_region_with_current_tile()
+DONE (21/2/20 at 2020)
+
+Finish open_export_map_window()
+DONE (23/2/20 at 1007)
+
+Write export_map()
+(DONE 23/2/20 at 1049)
+
+Write open_import_map_window()
+(DONE 23/2/20 at 1108)
+
+Write import_map()
+(DONE 23/2/20 at 1140)
+
+Add CLEAR MAP button to the control window, just below the IMPORT/EXPORT MAP button
+(DONE 23/2/20 at 1708)
+
+Set initial map zoom level at 2.
+DONE (23/2/20 at 2023)
+
+Let the user click on the map to place a tile.
+DONE (23/2/20 at 2020)
+
+BUG TO FIX: when the map is scrolled off the first screen, when the user clicks on a tile, it doesn't place properly.
+DONE (23/2/20 at 2034)
+
+Make map navigation thingy at the top of the map screen work (shows where user is in map, plus the user can click on it to navigate to that part of the map)
+DONE (23/2/20 at 2040)
+
+change font size in main window to 10pt
+(DONE 27/2/20 at 1021)
+
+- do OPEN WINDOW menu and button at top of CONTROLS window. This should contain the following options:
+TILES - for opening the TILES window
+ENEMIES - for opening the ENEMIES window
+ALL - for opening all extra windows
+DONE (27/2/20 at 1050)
+
+- when the level editor starts up it should open just the main window and the controls window
+DONE (27/2/20 at 1050)
